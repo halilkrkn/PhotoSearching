@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/halil/GitHub/PhotoSearching/app/src/main/res/drawable/gradient.xml" value="0.3609375" />
         <entry key="..\:/Users/halil/GitHub/PhotoSearching/app/src/main/res/layout/activity_main.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/halil/GitHub/PhotoSearching/app/src/main/res/layout/fragment_gallery.xml" value="0.22" />
+        <entry key="..\:/Users/halil/GitHub/PhotoSearching/app/src/main/res/layout/item_unsplash_photo.xml" value="0.33" />
       </map>
     </option>
   </component>
