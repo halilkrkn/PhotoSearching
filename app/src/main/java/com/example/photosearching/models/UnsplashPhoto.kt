@@ -1,8 +1,6 @@
 package com.example.photosearching.models
 
 import android.os.Parcelable
-import com.example.photosearching.models.entity.UnsplashPhotoUrls
-import com.example.photosearching.models.entity.UnsplashPhotoUser
 import kotlinx.android.parcel.Parcelize
 
 // TODO: 5.12.2021
