@@ -14,6 +14,6 @@ data class UnsplashPhotoUser(
     @SerializedName("twitter_username")
     val twitterUsername: String
 ) : Parcelable {
-    val attributionUrls get() = "htts://unsplash.com/$username?utm_sourse=PhotoSearching&utm_medium=referral"
+    val attributionUrls get() = "htts://unsplash.com/$username?utm_source=PhotoSearching&utm_medium=referral"
 
 }
