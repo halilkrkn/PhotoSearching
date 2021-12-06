@@ -1,4 +1,4 @@
-package com.example.photosearching.models
+package com.example.photosearching.data.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
