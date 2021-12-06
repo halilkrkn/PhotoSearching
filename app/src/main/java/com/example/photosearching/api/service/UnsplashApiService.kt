@@ -13,7 +13,6 @@ interface UnsplashApiService {
         const val BASE_URL = "https://api.unsplash.com/"
         //Api Key
         const val API_KEY = BuildConfig.UNSPLASH_ACCESS_KEY
-
     }
 
     @Headers("Accept-Version: v1","Authorization: Client-ID $API_KEY")
