@@ -8,8 +8,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.photosearching.data.repository.UnsplashRepository
 import com.example.photosearching.other.Constants.DEFAULT_QUERY
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GalleryViewModel @ViewModelInject constructor(
+@HiltViewModel
+class GalleryViewModel @Inject constructor(
     private val repository: UnsplashRepository
     ): ViewModel() {
 
@@ -25,5 +28,4 @@ class GalleryViewModel @ViewModelInject constructor(
         fun searchPhotos(query: String){
             currentQuery.value = query
         }
-
 }

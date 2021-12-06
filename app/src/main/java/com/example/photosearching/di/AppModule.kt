@@ -13,8 +13,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class) //@InstallIn annotasyonu ise modulün hangi component üzerinde bulunmasını istediğimizi belirtiriz. Componentlerin bir lifecycle’ı bulunmaktadır.
 object AppModule {
 
-    @Provides //@Provides annotasyonu modullerde nesneleri bağımlılık olarak tanımlamak için oluşturduğumuz methodların üzerinde kullanılır.
-    @Singleton // Nesneye her ulaştığımızda hep aynı nesneyi verecektir bize sürekli yeniden create etmez. Singleton  bir class’ın dışarıdan birden fazla instance(örnek, nesne) oluşturmasını engeller.
+    //@Provides annotasyonu modullerde nesneleri bağımlılık olarak tanımlamak için oluşturduğumuz methodların üzerinde kullanılır.
+    //  @Singleton Nesneye her ulaştığımızda hep aynı nesneyi verecektir bize sürekli yeniden create etmez. Singleton  bir class’ın dışarıdan birden fazla instance(örnek, nesne) oluşturmasını engeller.
+    @Provides
+    @Singleton
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
             .baseUrl(UnsplashApiService.BASE_URL)
