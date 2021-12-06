@@ -1,7 +1,6 @@
 package com.example.photosearching.api
 
-import com.example.photosearching.api.service.UnsplashApiService
-import com.example.photosearching.models.UnsplashPhoto
+import com.example.photosearching.data.models.UnsplashPhoto
 
 data class UnsplashResponse(
     val results: List<UnsplashPhoto>
