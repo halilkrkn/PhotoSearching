@@ -1,4 +1,4 @@
-package com.example.photosearching.ui.gallery
+package com.example.photosearching.ui.gallery.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -26,10 +26,10 @@ class UnsplashPhotoAdapter :
                         .load(photo.urls.regular)
                         .centerCrop()
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .error(R.drawable.ic_baseline_image_not_supported_24)
+                        .error(R.drawable.ic_baseline_cancel_presentation_24)
                         .into(imageViewItemUnsplashPhoto)
 
-                    textViewUsername.text = photo.user.username
+                    textViewUsername.text = photo.user.name
                 }
             }
     }
