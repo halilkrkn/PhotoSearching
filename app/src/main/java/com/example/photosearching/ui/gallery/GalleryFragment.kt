@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.photosearching.R
 import com.example.photosearching.databinding.FragmentGalleryBinding
+import com.example.photosearching.ui.gallery.adapter.UnsplashPhotoAdapter
+import com.example.photosearching.ui.gallery.adapter.UnsplashPhotoLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 //@AndroidEntryPoint annotation'ı ile activityde Hilt'i etkinleştirin
@@ -26,7 +28,14 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery){
         // RecyclerView ı Fragmente bağladık.
         binding.apply {
             recyclerView.setHasFixedSize(true)
-            recyclerView.adapter = adapter
+            recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+
+                // Burada withLoadStateHeaderAndFooter methodu ile hearder ve footer özelliklerini fragmentte tanımlamış olduk ve bu özellik PagingDataAdapter içerisinde hazır mevcut bir methottur. Burada Retry özellliğini PagingDataAdapter içerisinde çağırdık ve UnsplashPhotoLoadStateAdapter içerisindeki retry a tanımladık.
+                header = UnsplashPhotoLoadStateAdapter{adapter.retry()},
+                footer = UnsplashPhotoLoadStateAdapter{adapter.retry()},
+
+            )
+
 
         }
 
