@@ -21,16 +21,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageViewItemUnsplashPhoto"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:drawablePadding="4dp"
         android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
         android:gravity="center_vertical"
+
         android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/ic_round_emoji_people_24"
-        tools:text="username"
-
-        />
+        tools:text="username" />
 
 </RelativeLayout>

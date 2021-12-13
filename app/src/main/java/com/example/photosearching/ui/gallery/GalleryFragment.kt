@@ -5,8 +5,10 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import com.example.photosearching.R
 import com.example.photosearching.databinding.FragmentGalleryBinding
 import com.example.photosearching.ui.gallery.adapter.UnsplashPhotoAdapter
@@ -31,18 +33,43 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery){
         // RecyclerView ı Fragmente bağladık.
         binding.apply {
             recyclerView.setHasFixedSize(true)
+            recyclerView.itemAnimator = null
             recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
 
                 // Burada withLoadStateHeaderAndFooter methodu ile hearder ve footer özelliklerini fragmentte tanımlamış olduk ve bu özellik PagingDataAdapter içerisinde hazır mevcut bir methottur. Burada Retry özellliğini PagingDataAdapter içerisinde çağırdık ve UnsplashPhotoLoadStateAdapter içerisindeki retry a tanımladık.
                 header = UnsplashPhotoLoadStateAdapter{adapter.retry()},
                 footer = UnsplashPhotoLoadStateAdapter{adapter.retry()},
-
             )
+
+            // Uygulama açıldığında ve uygullama içerisinde eğer internet erişimi gittiğinde hata mesajı ille karşılaşıp retry butonu ile internet erişimi geldiğğinde tekrardan verileri almak için butonu aktifleştirdik.
+            buttonRetry.setOnClickListener {
+                adapter.retry()
+            }
+
         }
 
         //viewmodel tanımlamış olduğumuz photos dan verileri allarak adaptera gönderip fragment üzerinde yani UI da fotoları gösterdik.
         viewModel.photos.observe(viewLifecycleOwner){
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
+
+
+        //Burada ise internet erişimi uygulamayı açtığımızda hiç yoksa veya veriler uygulama açılldığında yükllenmediyse ve uygulama içerisinde gittiğinde ve yine filltrelleme yapıldığında veriler alamayacağı için uyarı mesajı gibi bir durum karşımıza çıkacak ve ordan retry işllemi ile eğer internet erişimi geri sağlanırsa verileri tekrardan geri çağıracaz.
+        adapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+                textViewError.isVisible = loadState.source.refresh is LoadState.Error
+
+                //Empty View - Buradaki amaç ise uygulama içerisinde filtrelleme yaparken alakasız aramalar yapıldığıda boş bir ekrandan ziyada uyarı mesajı ile kullllanıccıyı uyar işlemi yapıldı.
+                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1){
+                    recyclerView.isVisible = false
+                    textViewEmpty.isVisible = true
+                } else {
+                    textViewEmpty.isVisible = false
+                }
+            }
         }
 
         // Menuyü fragmentte bind ettik yani bağladık.
@@ -71,7 +98,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery){
                 }
                 return true
             }
-            
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
