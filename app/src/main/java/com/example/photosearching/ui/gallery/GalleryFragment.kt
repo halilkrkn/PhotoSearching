@@ -1,7 +1,10 @@
 package com.example.photosearching.ui.gallery
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.photosearching.R
@@ -35,16 +38,47 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery){
                 footer = UnsplashPhotoLoadStateAdapter{adapter.retry()},
 
             )
-
-
         }
 
         //viewmodel tanımlamış olduğumuz photos dan verileri allarak adaptera gönderip fragment üzerinde yani UI da fotoları gösterdik.
         viewModel.photos.observe(viewLifecycleOwner){
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
+
+        // Menuyü fragmentte bind ettik yani bağladık.
+        setHasOptionsMenu(true)
     }
 
+    // SearchView çağırılarak Search menü nin kurulumu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        // Menuyü Uı da gösterdik
+        inflater.inflate(R.menu.menu_gallery,menu)
+
+        // Menu içerisinde filtreleme yapmak için SearchView Methodunu çağırdık ve kullandık.
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        // Search menu kısmanda istenilen armayaı filtrelemeyi yapmak için kullanıcını yazdığını dinliyor ve Uı onu filtrelemeye özgü sonuçları gösteriyor
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                if(query != null){
+                    binding.recyclerView.scrollToPosition(0)
+                    viewModel.searchPhotos(query)
+                    searchView.clearFocus()
+                }
+                return true
+            }
+            
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+    }
+
+    // ViewBinding işlemi yapıldığğında onDestroyView methodunu çağırıp bindig i null olarak belirtmemiz geerek çünkü Galery Fragmentte crashlenme olmaması için
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

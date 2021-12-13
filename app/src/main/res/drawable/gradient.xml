@@ -3,13 +3,11 @@
     android:shape="rectangle">
 
     <gradient
-        android:startColor="@android:color/holo_red_dark"
-        android:endColor="@android:color/black"
+        android:startColor="#00FFFFFF"
+        android:endColor="@android:color/holo_red_light"
         android:angle="270"
         />
-    <corners
-        android:radius="@dimen/cardview_compat_inset_shadow"
-        />
+
 
 
 </shape>

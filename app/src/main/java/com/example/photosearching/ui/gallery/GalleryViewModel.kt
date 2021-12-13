@@ -24,7 +24,7 @@ class GalleryViewModel @Inject constructor(
             repository.getSearchResults(queryString).cachedIn(viewModelScope)
         }
 
-    // burada search yapamak istediğimiz photoların isimlerine göre filtreleme yapmak için gerekli string değerleri alıyoruz.
+    // burada search yapamak istediğimiz photoların isimlerine göre filtreleme yapmak için gerekli string değerleri alıyoruz. Yani UI daki Search Menu de yazılan filtreleme için yazılan stringleri allıyoruz.
         fun searchPhotos(query: String){
             currentQuery.value = query
         }
