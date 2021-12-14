@@ -1,12 +1,11 @@
 package com.example.photosearching.ui.gallery
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.example.photosearching.data.repository.UnsplashRepository
+import com.example.photosearching.repository.UnsplashRepository
 import com.example.photosearching.other.Constants.DEFAULT_QUERY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

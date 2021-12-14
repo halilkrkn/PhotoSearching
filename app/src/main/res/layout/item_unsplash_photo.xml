@@ -8,7 +8,9 @@
     <ImageView
         android:id="@+id/imageViewItemUnsplashPhoto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:src="@drawable/ic_launcher_foreground"
+        />
 
     <View
         android:layout_width="match_parent"

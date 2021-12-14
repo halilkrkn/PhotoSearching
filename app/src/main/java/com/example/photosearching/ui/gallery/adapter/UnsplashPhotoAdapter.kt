@@ -11,39 +11,61 @@ import com.example.photosearching.R
 import com.example.photosearching.data.models.UnsplashPhoto
 import com.example.photosearching.databinding.ItemUnsplashPhotoBinding
 
-class UnsplashPhotoAdapter :
+class UnsplashPhotoAdapter(private val listener: OnItemClickListener):
     PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
     // Buradaki ItemUnsplashPhotoBinding sınıfı aslında item_unsplash_photo.xml dosyasının bir otomatik olarak  oluşturulan ViewBinding Sınıfıdır.
     //    Mesela siz activity_splash.xml adında bir layout oluşturursunuz, arkaplanda otomatik olarak ActivitySplashBinding.kt binding nesnesi oluşturulur.
     // Bunu yapabilmemiz içib builld.gradle(:app) in içerisinde viewBindig true olarak yapılandırmak.
-    class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
+    inner class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            // Bu kısma UI da göstermek istediğimiz şeylerin komutlarını yazıp UI da gösteriyoruz.
-            fun bind(photo: UnsplashPhoto){
-                binding.apply {
-                    Glide.with(itemView)
-                        .load(photo.urls.regular)
-                        .centerCrop()
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .error(R.drawable.ic_baseline_cancel_presentation_24)
-                        .into(imageViewItemUnsplashPhoto)
+        // Bu kısma UI da göstermek istediğimiz şeylerin komutlarını yazıp UI da gösteriyoruz.
+        fun bind(photo: UnsplashPhoto) {
+            binding.apply {
+                Glide.with(itemView)
+                    .load(photo.urls.regular)
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .error(R.drawable.ic_baseline_cancel_presentation_24)
+                    .into(imageViewItemUnsplashPhoto)
 
-                    textViewUsername.text = photo.user.name
+                textViewUsername.text = photo.user.name
+            }
+        }
+
+        // burada asıl UnsplashPhotoAdapter recyclerview ı içerisnde tıklama işleminin yapıldığı yani click özelliğinin getirildiğği yer yer .
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    val item = getItem(position)
+                    if (item != null){
+                        listener.onItemClick(item)
+                    }
                 }
             }
+        }
+
+
     }
+
+    // burada OnItemClickListener dan interface oluşturup ve içerisine UnsplashPhoto dan verileri alması gerektiği içinde OnItemClick Adında fonskiyon methodu uyguladık.
+    // UnsplashPhotoAdapter a constructer işlemi yapıldı ve OnItemClickListener ı çağırılldı.
+    interface OnItemClickListener {
+        fun onItemClick(photo: UnsplashPhoto)
+}
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
-        val binding = ItemUnsplashPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemUnsplashPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PhotoViewHolder(binding)
     }
 
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val currentItem = getItem(position)
-        if (currentItem != null){
+        if (currentItem != null) {
             holder.bind(currentItem)
         }
     }
@@ -60,7 +82,8 @@ class UnsplashPhotoAdapter :
             }
 
             override fun areContentsTheSame(
-                oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean {
+                oldItem: UnsplashPhoto, newItem: UnsplashPhoto
+            ): Boolean {
                 return oldItem == newItem
             }
 
