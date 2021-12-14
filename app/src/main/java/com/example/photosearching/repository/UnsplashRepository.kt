@@ -1,4 +1,4 @@
-package com.example.photosearching.data.repository
+package com.example.photosearching.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
