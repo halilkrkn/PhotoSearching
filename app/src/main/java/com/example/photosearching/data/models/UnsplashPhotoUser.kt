@@ -14,6 +14,8 @@ data class UnsplashPhotoUser(
     @SerializedName("twitter_username")
     val twitterUsername: String
 ) : Parcelable {
-    val attributionUrls get() = "htts://unsplash.com/$username?utm_source=PhotoSearching&utm_medium=referral"
+
+    // Burada url ile detail sayfası(Detail Fragment) içerisindeki url i tanımlamış olduk ve görüntüyü yükleyen kullanıcının unsplash hesabındaki profilene yönlendirmek için böyle bir url oluşturuldu.
+    val attributionUrls get() = "https://unsplash.com/$username?utm_source=PhotoSearching&utm_medium=referral"
 
 }
