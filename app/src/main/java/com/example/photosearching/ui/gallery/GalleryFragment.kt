@@ -24,7 +24,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
     private val viewModel by viewModels<GalleryViewModel>()
     private var _binding: FragmentGalleryBinding? = null
-    private val binding get() =  _binding!!
+    private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,8 +40,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
 
                 // Burada withLoadStateHeaderAndFooter methodu ile hearder ve footer özelliklerini fragmentte tanımlamış olduk ve bu özellik PagingDataAdapter içerisinde hazır mevcut bir methottur. Burada Retry özellliğini PagingDataAdapter içerisinde çağırdık ve UnsplashPhotoLoadStateAdapter içerisindeki retry a tanımladık.
-                header = UnsplashPhotoLoadStateAdapter{adapter.retry()},
-                footer = UnsplashPhotoLoadStateAdapter{adapter.retry()},
+                header = UnsplashPhotoLoadStateAdapter { adapter.retry() },
+                footer = UnsplashPhotoLoadStateAdapter { adapter.retry() },
             )
 
             // Uygulama açıldığında ve uygullama içerisinde eğer internet erişimi gittiğinde hata mesajı ille karşılaşıp retry butonu ile internet erişimi geldiğğinde tekrardan verileri almak için butonu aktifleştirdik.
@@ -52,7 +52,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
         }
 
         //viewmodel tanımlamış olduğumuz photos dan verileri allarak adaptera gönderip fragment üzerinde yani UI da fotoları gösterdik.
-        viewModel.photos.observe(viewLifecycleOwner){
+        viewModel.photos.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
@@ -66,7 +66,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
                 textViewError.isVisible = loadState.source.refresh is LoadState.Error
 
                 //Empty View - Buradaki amaç ise uygulama içerisinde filtrelleme yaparken alakasız aramalar yapıldığıda boş bir ekrandan ziyada uyarı mesajı ile kullllanıccıyı uyar işlemi yapıldı.
-                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1){
+                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
                     recyclerView.isVisible = false
                     textViewEmpty.isVisible = true
                 } else {
@@ -86,23 +86,22 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     }
 
 
-
     // SearchView çağırılarak Search menü nin kurulumu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
         // Menuyü Uı da gösterdik
-        inflater.inflate(R.menu.menu_gallery,menu)
+        inflater.inflate(R.menu.menu_gallery, menu)
 
         // Menu içerisinde filtreleme yapmak için SearchView Methodunu çağırdık ve kullandık.
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
 
         // Search menu kısmanda istenilen armayaı filtrelemeyi yapmak için kullanıcını yazdığını dinliyor ve Uı onu filtrelemeye özgü sonuçları gösteriyor
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                if(query != null){
+                if (query != null) {
                     binding.recyclerView.scrollToPosition(0)
                     viewModel.searchPhotos(query)
                     searchView.clearFocus()

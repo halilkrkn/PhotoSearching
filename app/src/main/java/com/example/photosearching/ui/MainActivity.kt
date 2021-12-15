@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // Burada navigation kurulum ve confiqürasyon İşlemleri yapıldı.
-        val navHostFragment=
+        val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_main) as NavHostFragment
         navController = navHostFragment.findNavController()
 

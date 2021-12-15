@@ -25,7 +25,6 @@ class UnsplashPhotoLoadStateAdapter(private val retry: () -> Unit) :
             }
         }
 
-
         // Bu kısımda olluşturmuş olduğumuz UnsplashPhotoLoadStateFooter xml i içerisindeki uıları gözükmesini sağllattık ama veri yoksa buton ve textviewler gözüküyor. progress bar ise her yükleme sonunna gellindiğinde ortaya çıkıp yüklllemeyi yineliyor.
 
         fun bind(loadState: LoadState) {

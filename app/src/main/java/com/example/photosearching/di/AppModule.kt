@@ -9,8 +9,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module //@Module annotasyonuyla bağımlılıkları sağladığımız yani nesneleri oluşturduğumuz sınıflarımızın en başına eklenir. Constructer ekleyemeyeceğimiz tipler için binding yapmamızı sağlar.
-@InstallIn(SingletonComponent::class) //@InstallIn annotasyonu ise modulün hangi component üzerinde bulunmasını istediğimizi belirtiriz. Componentlerin bir lifecycle’ı bulunmaktadır.
+//@Module annotasyonuyla bağımlılıkları sağladığımız yani nesneleri oluşturduğumuz sınıflarımızın en başına eklenir. Constructer ekleyemeyeceğimiz tipler için binding yapmamızı sağlar.
+//@InstallIn annotasyonu ise modulün hangi component üzerinde bulunmasını istediğimizi belirtiriz. Componentlerin bir lifecycle’ı bulunmaktadır.
+@Module
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
     //@Provides annotasyonu modullerde nesneleri bağımlılık olarak tanımlamak için oluşturduğumuz methodların üzerinde kullanılır.

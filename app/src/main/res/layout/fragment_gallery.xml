@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gallery.GalleryFragment"
-    >
+    tools:context=".ui.gallery.GalleryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -39,8 +38,7 @@
         android:layout_centerInParent="true"
         android:text="Retry"
         android:visibility="gone"
-        tools:visibility="visible"
-        />
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/text_view_empty"
