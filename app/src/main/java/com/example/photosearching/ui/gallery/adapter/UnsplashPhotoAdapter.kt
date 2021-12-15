@@ -26,14 +26,14 @@ class UnsplashPhotoAdapter(private val listener: OnItemClickListener):
                     .load(photo.urls.regular)
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .error(R.drawable.ic_baseline_cancel_presentation_24)
+                    .error(R.drawable.ic_baseline_image_not_supported_24)
                     .into(imageViewItemUnsplashPhoto)
 
                 textViewUsername.text = photo.user.name
             }
         }
 
-        // burada asıl UnsplashPhotoAdapter recyclerview ı içerisnde tıklama işleminin yapıldığı yani click özelliğinin getirildiğği yer yer .
+        // burada asıl UnsplashPhotoAdapter recyclerview ı içerisnde tıklama işleminin yapıldığı yani click özelliğinin getirildiği yer yer .
         init {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
