@@ -11,25 +11,25 @@ import java.io.IOException
 class UnsplashPagingSource(
     private val unsplashApi: UnsplashApiService,
     private val query: String
-): PagingSource<Int,UnsplashPhoto>() {
+) : PagingSource<Int, UnsplashPhoto>() {
 
     // apiden alacağımız request(istekleri) buradan sayfaya yüklüyoruz.
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashPhoto> {
 
         val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
 
-       return try {
-            val response = unsplashApi.getSearchPhoto(query,position,params.loadSize)
+        return try {
+            val response = unsplashApi.getSearchPhoto(query, position, params.loadSize)
             val photos = response.results
 
-           LoadResult.Page(
-               data = photos,
-               prevKey = if ( position == UNSPLASH_STARTING_PAGE_INDEX) null else position - 1,
-               nextKey = if ( photos.isEmpty()) null else position + 1
-           )
-        } catch (e: IOException){
+            LoadResult.Page(
+                data = photos,
+                prevKey = if (position == UNSPLASH_STARTING_PAGE_INDEX) null else position - 1,
+                nextKey = if (photos.isEmpty()) null else position + 1
+            )
+        } catch (e: IOException) {
             LoadResult.Error(e)
-        } catch (e: HttpException){
+        } catch (e: HttpException) {
             LoadResult.Error(e)
         }
 

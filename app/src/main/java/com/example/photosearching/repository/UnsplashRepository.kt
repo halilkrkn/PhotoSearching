@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton // Nesneye her ulaştığımızda hep aynı nesneyi verecektir bize sürekli yeniden create etmez .
-class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashApiService){
+class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashApiService) {
 
     fun getSearchResults(query: String) =
         Pager(

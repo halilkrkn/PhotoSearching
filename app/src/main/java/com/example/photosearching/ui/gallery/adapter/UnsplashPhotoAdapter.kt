@@ -11,7 +11,7 @@ import com.example.photosearching.R
 import com.example.photosearching.data.models.UnsplashPhoto
 import com.example.photosearching.databinding.ItemUnsplashPhotoBinding
 
-class UnsplashPhotoAdapter(private val listener: OnItemClickListener):
+class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
     // Buradaki ItemUnsplashPhotoBinding sınıfı aslında item_unsplash_photo.xml dosyasının bir otomatik olarak  oluşturulan ViewBinding Sınıfıdır.
@@ -37,9 +37,9 @@ class UnsplashPhotoAdapter(private val listener: OnItemClickListener):
         init {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION){
+                if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
-                    if (item != null){
+                    if (item != null) {
                         listener.onItemClick(item)
                     }
                 }
@@ -53,7 +53,7 @@ class UnsplashPhotoAdapter(private val listener: OnItemClickListener):
     // UnsplashPhotoAdapter a constructer işlemi yapıldı ve OnItemClickListener ı çağırılldı.
     interface OnItemClickListener {
         fun onItemClick(photo: UnsplashPhoto)
-}
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {

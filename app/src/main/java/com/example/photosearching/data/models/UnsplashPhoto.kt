@@ -12,4 +12,4 @@ data class UnsplashPhoto(
     val description: String?,
     val urls: UnsplashPhotoUrls,
     val user: UnsplashPhotoUser
-): Parcelable
+) : Parcelable
