@@ -28,8 +28,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         val bindingDetailsFragment = FragmentDetailsBinding.bind(view)
 
         bindingDetailsFragment.apply {
-            val photo =
-                detailArgs.photo // Bu kısımda oluşturmuş olduğumuz detailArg değişkeni sayesinde photo yani UnsplashPhoto sınıfına ulaştık ki içerisidneki değerleri kullanabilmek için.
+            val photo = detailArgs.photo // Bu kısımda oluşturmuş olduğumuz detailArg değişkeni sayesinde photo yani UnsplashPhoto sınıfına ulaştık ki içerisidneki değerleri kullanabilmek için.
             Glide.with(this@DetailsFragment)
                 .load(photo.urls.regular)
                 .error(R.drawable.ic_baseline_image_not_supported_24)
