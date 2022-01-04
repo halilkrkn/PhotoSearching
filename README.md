@@ -11,7 +11,7 @@
 - View Binding
 - Navigation Components
 - Coroutines 
-- ## Bu Uygulamada Neler Öğreneceksiniz?
+- ## Bu Uygulamada Neler Öğrenildi?
 - Unsplash Apisi üzerinden verileri retroit kütüphanesindeki yapıları kullanarak daha sağlıklı nasıl çekildiğini
 - Pagination İşlemi yani Sayfalandırma başka bir deyişle Sonsuz Sayfalandırma yapısını RecyclerView'le nasıl kullanıldığını
 - View Binding implementasyonu ve kullanımı
