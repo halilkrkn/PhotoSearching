@@ -20,5 +20,6 @@
 - Recyclerview içerisinde DiffUtil kullanımını öğreneceksiniz.
 - ## Kaynaklar
 - Bu ileri seviye uygulamayı Youtube üzerinden kanalı mevcut olan başlangıç ve ileri seviye Android Yapılarını/Teknolojilerini projeler yaparak kurslar seklinde anlatan [Coding in Flow](https://www.youtube.com/playlist?list=PLrnPJCHvNZuC_pEfFlZuTmjlY4T3DTtED) kanalından gelişimime katkı sağlamış bulunmaktayım.
-
+- ## [ScreenShots](https://github.com/halilkrkn/PhotoSearching/tree/master/screenshots)
+![Alt Text](https://github.com/halilkrkn/PhotoSearching/blob/master/screenshots/photosearching.gif)
 
