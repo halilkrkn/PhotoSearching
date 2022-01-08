@@ -8,10 +8,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.photosearching.R
-import com.example.photosearching.data.models.UnsplashPhoto
 import com.example.photosearching.databinding.FragmentGalleryBinding
 import com.example.photosearching.ui.gallery.adapter.UnsplashPhotoAdapter
 import com.example.photosearching.ui.gallery.adapter.UnsplashPhotoLoadStateAdapter
@@ -19,8 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 //@AndroidEntryPoint annotation'ı ile activityde Hilt'i etkinleştirin
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery),
-    UnsplashPhotoAdapter.OnItemClickListener {
+class GalleryFragment : Fragment(R.layout.fragment_gallery)/*,OnItemClickListener*/{
 
     private val viewModel by viewModels<GalleryViewModel>()
     private var _binding: FragmentGalleryBinding? = null
@@ -32,7 +29,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
         // FragmentGalleryBinding asllında llayout içerisndeki fragment_gallery.xmllll in bir bir viewBinding Sınıfı ve onu da Fragmente bağladık.
         _binding = FragmentGalleryBinding.bind(view)
 
-        val adapter = UnsplashPhotoAdapter(this)
+        val adapter = UnsplashPhotoAdapter(/*this*/)
         // RecyclerView ı Fragmente bağladık.
         binding.apply {
             recyclerView.setHasFixedSize(true)
@@ -80,10 +77,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     }
 
     // Sayfa içerisinde görüntülere tıklayıp detaylara gitmemiz için click işlemi yapılldı ve nagivate işlemi ilede detail sayfasına yönlendirme yapıldı.
-    override fun onItemClick(photo: UnsplashPhoto) {
-        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
-        findNavController().navigate(action)
-    }
+//    override fun onItemClick(photo: UnsplashPhoto) {
+//        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
+//        findNavController().navigate(action)
+//    }
 
 
     // SearchView çağırılarak Search menü nin kurulumu
